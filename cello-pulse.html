@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CELLO PULSE 隐私政策</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+  </head>
+  <body>
+    <div class="page">
+      <a class="back-link" href="./">← 返回应用列表</a>
+
+      <section class="card policy-card">
+        <div class="policy-label">CELLO PULSE</div>
+        <h1>大提琴调音器 · 隐私政策</h1>
+        <p class="policy-updated">最近更新：2026 年 1 月 27 日</p>
+
+        <div class="policy-content">
+          <div class="policy-block">
+            <h2>收集与用途</h2>
+            <ul>
+              <li><strong>麦克风音频：</strong> 仅用于实时检测音高，在本地处理后立即丢弃，不会录音或上传。</li>
+              <li><strong>设备信息：</strong> 包含系统版本、型号、语言和时区，用于兼容性调优，不与身份绑定。</li>
+              <li>
+                <strong>匿名统计（可选）：</strong> 若允许分析数据，崩溃日志与功能使用次数由 App Store / Google Play 提供的匿名报告完成。
+              </li>
+            </ul>
+          </div>
+
+          <div class="policy-divider"></div>
+
+          <div class="policy-block">
+            <h2>不会做的事</h2>
+            <ul>
+              <li>不会请求与调音无关的权限。</li>
+              <li>不会收集姓名、邮箱、电话等可识别信息。</li>
+              <li>不会向任何广告或数据经纪人出售、出租数据。</li>
+            </ul>
+          </div>
+
+          <div class="policy-divider"></div>
+
+          <div class="policy-block">
+            <h2>第三方与共享</h2>
+            <ul>
+              <li><strong>App Store / Google Play：</strong> 仅能看到崩溃堆栈、设备型号与系统版本，用于匿名性能统计。</li>
+              <li><strong>Apple / Android 权限系统：</strong> 用于请求与管理麦克风权限，只能访问权限状态。</li>
+            </ul>
+            <p>无其他第三方 SDK、广告或追踪器。如有新增，将在此处更新。</p>
+          </div>
+
+          <div class="policy-divider"></div>
+
+          <div class="policy-block">
+            <h2>数据留存与安全</h2>
+            <p>实时音频在分析后即刻丢弃；崩溃与性能数据在 90 天后仅保留统计汇总。不会长期存储原始日志。</p>
+          </div>
+
+          <div class="policy-divider"></div>
+
+          <div class="policy-block">
+            <h2>你的权利</h2>
+            <ul>
+              <li><strong>撤回权限：</strong> 可在系统设置中关闭麦克风或分析权限，应用会即时响应。</li>
+              <li><strong>访问 / 删除：</strong> 通过邮件可请求导出或删除分析数据，我将在 7 个工作日内处理。</li>
+              <li><strong>反馈：</strong> 任何隐私疑问或建议都会得到快速回复。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        © <span id="year"></span> CELLO PULSE — Privacy first.
+      </footer>
+    </div>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
