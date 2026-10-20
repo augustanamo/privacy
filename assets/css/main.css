@@ -272,6 +272,16 @@ nav {
   font-size: 0.95rem;
 }
 
+/* 政策正文里的代码/接口名（chrome.storage.local、og:image 之类） */
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  padding: 1px 5px;
+  border-radius: 6px;
+  background: rgba(15, 23, 42, 0.06);
+  color: var(--text);
+}
+
 @media (max-width: 640px) {
   .page {
     padding: 48px 18px 80px;

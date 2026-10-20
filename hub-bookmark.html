@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hub.Bookmark 隐私政策</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+  </head>
+  <body>
+    <div class="page">
+      <a class="back-link" href="./">← 返回应用列表</a>
+
+      <section class="card policy-card">
+        <div class="policy-label">HUB.BOOKMARK</div>
+        <h1>阶梯书签索引 · 隐私政策</h1>
+        <p class="policy-updated">
+          最近更新：2026 年 10 月 20 日 · 适用 Chrome 扩展 v0.3.0（完整版与仅书签管理版适用同一份政策）
+        </p>
+
+        <div class="policy-content">
+          <div class="policy-block">
+            <h2>一句话概括</h2>
+            <p>
+              Hub.Bookmark 把浏览器书签整理成左右交错的阶梯索引。它没有账号、没有服务器、没有统计后台——
+              你的书签、分类、备注、封面全部留在你自己的浏览器里，我不会看到，也无法取回。
+              网络请求只发生在两件事上：给某条书签配图、给某条书签猜分类，且都由你主动触发。
+            </p>
+          </div>
+
+          <div class="policy-divider"></div>
+
+          <div class="policy-block">
+            <h2>数据存在哪里</h2>
+            <ul>
+              <li>
+                <strong>索引与快照：</strong>
+                书签标题、网址、分类、备注、封面图缓存在本机扩展存储区（<code>chrome.storage.local</code>），
+                不随设备漫游，卸载即消失。
+              </li>
+              <li>
+                <strong>设置项：</strong>
+                主题、语言、卡片选择等少量配置走 <code>chrome.storage.sync</code>，随你的 Chrome 账号同步。
+                不想要跨设备同步，可在 <code>chrome://settings/syncSetup</code> 里关闭。
+              </li>
+              <li>
+                <strong>网页版（H5）模式：</strong>
+                同样的数据存在当前站点的浏览器数据库（IndexedDB）里，同样不离开本机。
+              </li>
+            </ul>
+          </div>
+
+          <div class="policy-divider"></div>
+
+          <div class="policy-block">
+            <h2>扩展读什么（对应每一项权限）</h2>
+            <ul>
+              <li>
+                <strong>书签：</strong>
+                读取书签标题、网址、所属文件夹，用于建立索引。点「写回浏览器」时会创建分类文件夹并移动书签，
+                同时清理「因为书签被搬走而变空」的旧文件夹——<strong>里面有内容的文件夹一律不动</strong>。
+              </li>
+              <li>
+                <strong>最常访问（topSites）：</strong>
+                新标签页的六张卡片默认取「最常访问」。这是浏览器在本地算好的域名清单，
+                扩展只读结果，<strong>拿不到你的浏览历史明细</strong>；在卡片上长按即可换成任意一条书签。
+              </li>
+              <li>
+                <strong>网站图标（favicon）：</strong>
+                用于在列表和卡片上显示站点图标。
+              </li>
+              <li>
+                <strong>当前标签页截图（activeTab / captureVisibleTab）：</strong>
+                只有你点「截图补封面」且当前打开的正是这条书签时，才拍一次可见区域，
+                并在本机转成封面（JPEG），<strong>不上传</strong>。若当前页与目标书签不是同一页，扩展会拒绝截取。
+              </li>
+              <li>
+                <strong>所有网站（&lt;all_urls&gt;）：</strong>
+                为了让任意一条书签都能抓封面、取图标、判断是否还能打开。
+                扩展<strong>没有内容脚本</strong>：不注入页面、不读正文、不监听输入、不拦截请求。
+              </li>
+              <li>
+                <strong>侧边栏 / 右键菜单：</strong>
+                只是入口（打开工作台、把当前页存入），本身不涉及任何数据。
+              </li>
+            </ul>
+          </div>
+
+          <div class="policy-divider"></div>
+
+          <div class="policy-block">
+            <h2>什么时候会有数据离开你的浏览器</h2>
+            <p>
+              只有在你执行「AI 语义归类」「AI 重设分类体系」「补封面」这几类动作时，才会有请求发往外部。
+              每一处发什么，逐条列在这里：
+            </p>
+            <ul>
+              <li>
+                <strong>猜分类 → text.pollinations.ai（Pollinations 的免密钥文本接口）：</strong>
+                发送这一条书签的标题（截断到 90 字）、域名 + 路径（截断到 80 字）、原来的文件夹名（截断到 44 字）。
+                「重设分类体系」时还会带上文件夹分布（文件夹名与条数）。<strong>不发送完整网址、不发送备注、不发送其他书签。</strong>
+              </li>
+              <li>
+                <strong>取分享大图与网页标题 → api.microlink.io：</strong>
+                发送这一条书签的<strong>完整网址</strong>（含查询参数），换回 <code>og:image</code> 等页面元数据。
+              </li>
+              <li>
+                <strong>取站点图标 → icon.horse / favicon.im / f1.allesedv.com / favicon.yandex.net：</strong>
+                只发送<strong>域名</strong>，不含路径与参数；前一个取不到才试下一个。
+              </li>
+              <li>
+                <strong>抓封面与判断失效 → 直接请求书签本身的网址：</strong>
+                这一步不经过任何第三方，和你自己用浏览器打开它没有区别（对方服务器能看到你的 IP，与平时上网一致）。
+              </li>
+              <li>
+                <strong>截图补封面 → 全程在本机完成：</strong>
+                图片以 data URL 形式存进本地存储，不经过网络。
+              </li>
+            </ul>
+          </div>
+
+          <div class="policy-divider"></div>
+
+          <div class="policy-block">
+            <h2>关于「失效链接」的判定</h2>
+            <p>
+              抓封面本来就要发一次请求，返回的状态码顺带用于判断：404 / 410 / 451 记为「已失效」，
+              连不上记为「打不开」，而 401 / 403 / 429 视为「站点活着、只是不让抓」，不会牵连书签。
+              一键清理前会列出完整清单等你确认，删掉的书签先进入回收站，可撤销。
+            </p>
+          </div>
+
+          <div class="policy-divider"></div>
+
+          <div class="policy-block">
+            <h2>不会做的事</h2>
+            <ul>
+              <li>不收集姓名、邮箱、电话、设备标识——没有账号体系，也无从关联到你。</li>
+              <li>不做使用统计、崩溃上报、A/B 实验；不含任何广告 SDK 或追踪脚本。</li>
+              <li>不把数据出售、出租或交换给任何第三方。</li>
+              <li>不读你正在浏览的页面内容，不记录浏览历史，不监控输入。</li>
+              <li>
+                不含远程代码：所有 JS 都在安装包里，运行时不加载外部脚本，因此商店审核中「远程代码」一项为「否」。
+              </li>
+            </ul>
+          </div>
+
+          <div class="policy-divider"></div>
+
+          <div class="policy-block">
+            <h2>数据留存与删除</h2>
+            <ul>
+              <li>
+                <strong>本机数据：</strong>卸载扩展即全部清除；扩展内的「回收站 / 清空」可按条或整体删除；
+                <code>chrome.storage.sync</code> 里的设置项可在 Chrome 设置中单独清除。
+              </li>
+              <li>
+                <strong>第三方请求：</strong>上文四个服务会按各自政策处理请求日志，我无法访问、也无法代你删除。
+                不想产生这类请求，可以关掉 AI 归类、不改用自动补封面，或者断网整理（离线规则整理仍然完全可用）。
+              </li>
+            </ul>
+          </div>
+
+          <div class="policy-divider"></div>
+
+          <div class="policy-block">
+            <h2>儿童、变更与联系</h2>
+            <ul>
+              <li><strong>儿童：</strong>本扩展不面向 13 岁以下儿童，也不会有意收集任何人的可识别信息。</li>
+              <li>
+                <strong>政策变更：</strong>出现实质变化时会更新本页日期，并在扩展的版本说明里注明。
+              </li>
+              <li>
+                <strong>联系方式：</strong>任何隐私疑问、数据导出或删除请求，发邮件至
+                <a class="contact-link" href="mailto:hello@cellopulse.app">hello@cellopulse.app</a>
+                （标题写「Hub.Bookmark 隐私」即可），我将在 7 个工作日内回复。
+              </li>
+            </ul>
+          </div>
+
+          <div class="policy-divider"></div>
+
+          <div class="policy-block">
+            <h2>English summary</h2>
+            <ul>
+              <li>
+                <strong>No account, no server, no analytics.</strong> Bookmarks, categories, notes and covers
+                are stored in <code>chrome.storage.local</code> on your own machine; a few settings sync via
+                <code>chrome.storage.sync</code> with your Chrome account and can be turned off in Chrome settings.
+              </li>
+              <li>
+                <strong>Outbound requests happen only on your action.</strong> “AI classify” sends one bookmark’s
+                truncated title (90 chars), domain + path (80 chars) and original folder name (44 chars) to
+                text.pollinations.ai. “Fetch cover” sends that bookmark’s full URL to api.microlink.io for
+                <code>og:image</code> metadata. Site icons are requested by <strong>domain only</strong> from
+                icon.horse, favicon.im, f1.allesedv.com or favicon.yandex.net. Cover fetching and link checks go
+                straight to the bookmarked site itself, exactly as opening it in your browser would.
+              </li>
+              <li>
+                <strong>Tab capture stays local.</strong> <code>captureVisibleTab</code> is used only when you press
+                “capture cover” on the page you have open; the image is stored locally and never uploaded.
+              </li>
+              <li>
+                <strong>The &lt;all_urls&gt; permission</strong> exists to fetch covers, icons and link status for
+                arbitrary bookmarks. The extension has no content scripts: it never injects into pages, never reads
+                page content, never tracks browsing.
+              </li>
+              <li>
+                <strong>No sale, no ads, no remote code.</strong> Nothing is sold or shared, and no JavaScript is
+                loaded at runtime — everything ships inside the package.
+              </li>
+              <li>
+                <strong>Deletion:</strong> uninstalling the extension removes all local data. Third-party request logs
+                are handled under those services’ own policies.
+              </li>
+              <li>
+                <strong>Contact:</strong>
+                <a class="contact-link" href="mailto:hello@cellopulse.app">hello@cellopulse.app</a>
+                — replies within 7 business days.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        © <span id="year"></span> Hub.Bookmark — 书签属于你自己。
+      </footer>
+    </div>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
